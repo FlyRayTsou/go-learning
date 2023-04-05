@@ -1,14 +1,5 @@
 # Chapter 5 system call
 
-## 5.0
-
-### 日本語
-
-- 探索（たんさく）
-- 座学（ざがく）
-- 紙面（しめん）
-- まれ：rare
-
 ## 5.1 システムコールとは何か
 
 ### 5.1.1 CPUの動作モード
@@ -75,8 +66,13 @@
 
 ### 5.5
 
-### 日本語
+# 日本語
 
+- 5.0
+  - 探索（たんさく）
+  - 座学（ざがく）
+  - 紙面（しめん）
+  - まれ：rare
 - 5.1.1
   - 特権（とっけん）
   - 覗く（のぞく）
@@ -114,6 +110,6 @@
   - 眺める（ながめる）
 
 
-### Preview
+# Other
 
-- press command+shift+V in the editor.
+- press command+shift+V in the visual studio code to preview.
