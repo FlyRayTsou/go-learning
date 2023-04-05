@@ -64,7 +64,7 @@
 - https://github.com/torvalds/linux/blob/v5.16/arch/x86/entry/entry_64.S#L113
 - https://github.com/torvalds/linux/blob/v5.16/arch/x86/kernel/cpu/common.c#L1794
 
-### 5.5
+## 5.5
 
 # 日本語
 
