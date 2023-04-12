@@ -4,7 +4,6 @@
 
 ### 5.1.1 CPUの動作モード
 
-- 第4章に話したChannelはThreadの話で、第5章にOSの話はProcessの話です。
   - [Process Vs. Thread | Difference Between Process and Thread](https://www.javatpoint.com/process-vs-thread)
 - 動作モード
   - [Intel系CPUはリングプロテクション](https://ja.wikipedia.org/wiki/リングプロテクション)
@@ -20,6 +19,8 @@
   - https://zenn.dev/highgrenade/articles/3238e4b6c00de5
 - WebAssembly System Interface
   - https://hacks.mozilla.org/2019/03/standardizing-wasi-a-webassembly-system-interface
+- https://wasmer.io/
+- https://docs.docker.com/desktop/wasm/
 
 ## 5.2 Go言語におけるシステムコールの実装
 
@@ -65,6 +66,36 @@
 - https://github.com/torvalds/linux/blob/v5.16/arch/x86/kernel/cpu/common.c#L1794
 
 ## 5.5
+- https://zenn.dev/hajimehoshi/articles/72f027db464280
+
+## 5.6
+
+- [Disabling and Enabling System Integrity Protection](https://developer.apple.com/documentation/security/disabling_and_enabling_system_integrity_protection)
+
+- System Integrity Protectionをdisableしても、Permission deniedの状態
+
+```
+sudo dtruss ./go-project/ch5_system-call/5.2.1.go 
+Password:
+dtrace: system integrity protection is on, some features will not be available
+dtrace: failed to execute ./go-project/ch5_system-call/5.2.1.go: Permission denied
+
+## After disable System Integrity Protection
+rayt@RaydeMacBook-Pro ~ % csrutil status
+System Integrity Protection status: disabled.
+rayt@RaydeMacBook-Pro ~ % sudo dtruss ./go-project/ch5_system-call/5.2.1.go
+Password:
+dtrace: failed to execute ./go-project/ch5_system-call/5.2.1.go: Permission denied
+```
+
+
+## 5.7
+
+- https://linuxjm.osdn.jp/html/LDP_man-pages/man2/write.2.html
+- https://learn.microsoft.com/en-us/windows/win32/api/winbase/nf-winbase-formatmessage
+
+## 5.8
+- [ユーザーランド](https://www.weblio.jp/content/%E3%83%A6%E3%83%BC%E3%82%B6%E3%83%BC%E3%83%A9%E3%83%B3%E3%83%89)：OSが動作するのに必要な、カーネル以外の部分。ファイルシステムやファイル操作コマンド、シェルなどの基本的なソフトウェア群を指す。
 
 # 日本語
 
@@ -108,6 +139,18 @@
   - 隣接（りんせつ）
 - 5.5
   - 眺める（ながめる）
+- 5.6
+  - 冒頭（ぼうとう）
+  - 中途半端（ちゅうとはんぱ）
+- 5.7
+  - 単なる（たんなる）
+  - 察し（さっし）
+  - すばやい：fast
+- 5.8
+  - もっとも：most
+  - またがず：
+  - 擬似：ぎじ
+  - 防ぐ（ふせぐ）
 
 
 # Other
