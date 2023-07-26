@@ -274,8 +274,11 @@ TERM_PROGRAM=iTerm.app
 HELLO=WORLD
 ```
 
+- https://github.com/joho/godotenv
+
 ## 11.4.3
 WSL(Windows Subsystem for linux)
+WSL2(WindowsとLinuxがシームレスに提携できるようになっています。)：まるで一つのOS環境である
 
 # 11.5
 
