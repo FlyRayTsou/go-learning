@@ -17,7 +17,7 @@ func main() {
 	// println(cmdName) ./my-printenv.bash
 	args := flag.Args()[1:]
 	// println(args) [0/0]0xc0000b2010
-	flag.Args()
+	// flag.Args() not need
 
 	cmd := exec.Command(cmdName, args...)
 

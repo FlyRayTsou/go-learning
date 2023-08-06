@@ -281,7 +281,87 @@ WSL(Windows Subsystem for linux)
 WSL2(WindowsとLinuxがシームレスに提携できるようになっています。)：まるで一つのOS環境である
 
 # 11.5
+Tiny Shell
+- https://github.com/shibukawa/tish
 
-# 11.6
+1. ユーザーの入力を受け付ける
+2. 入力されたテキストの分解
+3. コマンドと引数の全処理
+4. 実行ファイルの探索
+5. ワイルドカードの展開
+6. プロセスの起動
+
+## 11.5.1 ユーザーの入力を受け付ける
+
+11.5.1-1.go
+11.5.1-2.go
+
+## 11.5.2 入力されたテキストの分解
+
+### Shlex
+- https://github.com/google/shlex
+- This repository has been archived by the owner on Dec 30, 2022. It is now read-only.
+
+```
+// expected boolean or range expression, found assignment (missing parentheses around composite literal?)synta
+for ; token, err := l.Next(); err != nil {
+	args = append(args, token)
+}
+```
+
+11.5.2-1.go
+11.5.2-2.go
+
+## 11.5.3 コマンドと引数の全処理
+
+- 引数やコマンドの中に変数があれば、それらを実際のデータと置き換えます。
+```
+rayt@RaydeMacBook-Pro ch11_command_shell_101 % echo "hello ${USER}"
+hello rayt
+```
+
+- さらに実用的なシェルでは、あるコマンドの引数で別のコマンドをバッククオート(`)や$(...)でxむことにより、その部分を「別のコマンドを実行した結果の文字列」で置き換えコマンドを実行するという機能があります。
+
+```
+file_count=$(ls -l | wc -l)
+echo "ファイル数は ${file_count} です。"
+```
+
+## 11.5.4 実行ファイルの探索
+
+```
+rayt@RaydeMacBook-Pro ch11_command_shell_101 % which echo
+echo: shell built-in command
+rayt@RaydeMacBook-Pro ch11_command_shell_101 % which cd
+cd: shell built-in command
+rayt@RaydeMacBook-Pro ch11_command_shell_101 % which cat
+/bin/cat
+```
+
+## 11.5.5 ワイルドカードの展開
+
+```
+rayt@RaydeMacBook-Pro ch11_command_shell_101 % ls *.go
+```
+
+11.5.5.go
+
+## 11.5.6 プロセスの起動
+
+プロセス：Ch12
+メモリ：Ch17
+
+# 11.6 Unix哲学とシェル
+- UNIXというシステムは小さなユーティリティを組み合わせて多くの仕事を行うように設計されています。その設計の背後（はいご）にある考え方を称して（しょうして）「Unix哲学」と呼ぶことがあります
+- これがUnix哲学です。一つのことだけをうまく行うプログラムをいくつも作成しましょう。互いに強調して動作するプログラムをいくつも作成しましょう。テキストストリームを扱うプログラムをいくつも作りましょう。なぜならテキストストリームはユニバーサルなインタフェースだからです。
+
+```
+rayt@RaydeMacBook-Pro ch11_command_shell_101 % cat *.md | grep unix | wc -l
+       2
+rayt@RaydeMacBook-Pro ch11_command_shell_101 % cat *.rst | grep unix | wc -l
+zsh: no matches found: *.rst
+       0
+```
 
 # 11.7
+
