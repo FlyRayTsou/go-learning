@@ -1,30 +1,19 @@
 package main
 
 import (
-	"errors"
-	"io"
-	"log"
-
-	"github.com/peterh/liner"
+	"fmt"
 )
 
 func main() {
-	line := liner.NewLiner()
-	line.SetCtrlCAborts(true)
-	for {
-		if cmd, err := line.Prompt(" "); err == nil {
-			if cmd == "" {
-				continue
-			}
-			// ここでコマンドを処理する
-			log.Print(cmd)
-		} else if errors.Is(err, io.EOF) {
-			break
-		} else if err == liner.ErrPromptAborted {
-			log.Print("Aborted")
-			break
-		} else {
-			log.Print("Error reading line: ", err)
-		}
-	}
+	var cmd, cmd2 string
+	// Calling Scanf() function for
+	// scanning and reading the input
+	// texts given in standard input
+
+	// rayt@RaydeMacBook-Pro ch11_command_shell_101 % go run 11.5.1-1.go
+	// cd ..
+	fmt.Scanf("%s %s", &cmd, &cmd2)
+
+	// You input cmd : cd .. .
+	fmt.Printf("You input cmd : %s %s .\n", cmd, cmd2)
 }

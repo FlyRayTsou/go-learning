@@ -281,8 +281,19 @@ WSL(Windows Subsystem for linux)
 WSL2(WindowsとLinuxがシームレスに提携できるようになっています。)：まるで一つのOS環境である
 
 # 11.5
+シェルがコマンドを実行するまでの次の各ステップについて説明
+
+
 Tiny Shell
 - https://github.com/shibukawa/tish
+- タブ機能がない
+
+```
+rayt@RaydeMacBook-Pro tish-main % go run cmd/tish/main.go
+🐸 tiny shell
+
+  🕓23:18:19    👤rayt@RaydeMacBook-Pro.local    📁~/Downloads/tish-main    ✔︎
+```
 
 1. ユーザーの入力を受け付ける
 2. 入力されたテキストの分解
@@ -292,11 +303,30 @@ Tiny Shell
 6. プロセスの起動
 
 ## 11.5.1 ユーザーの入力を受け付ける
+シェルは起動すると「ユーザーの入力受け付ける状態である」ことをプロンプトによって示します。そして「ユーザーがやりたいこと」を文字列の形で受け取ります。
 
-11.5.1-1.go
-11.5.1-2.go
+### 11.5.1-1.go
+- fmt.Scanf()など単一の文字列として受け取ればいいでしょう
+
+```
+rayt@RaydeMacBook-Pro ch11_command_shell_101 % go run 11.5.1-1.go
+cd ..
+// why % in the end?
+// https://stackoverflow.com/questions/59091824/why-does-printf-leave-an-extra-after-my-output
+// The '%' you are seeing is your bash / shell prompt for missing newlines.
+// You input cmd : cd .. .%
+// fmt.Printf("You input cmd : %s %s .\n", cmd, cmd2)
+// You input cmd : cd .. .
+// fmt.Printf("You input cmd : %s %s .\n", cmd, cmd2)
+```
+
+### 11.5.1-2.go
+- https://github.com/peterh/liner
+- SetCompleter
 
 ## 11.5.2 入力されたテキストの分解
+
+
 
 ### Shlex
 - https://github.com/google/shlex
@@ -310,7 +340,10 @@ for ; token, err := l.Next(); err != nil {
 ```
 
 11.5.2-1.go
+
 11.5.2-2.go
+
+ | ; || && < > >> 2> 2>> &> &>>
 
 ## 11.5.3 コマンドと引数の全処理
 
