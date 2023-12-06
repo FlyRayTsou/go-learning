@@ -44,3 +44,49 @@ rayt@RaydeMacBook-Pro go-learning % go run ch18_timer/18.1.go
 - https://ja.wikipedia.org/wiki/OSI%E5%8F%82%E7%85%A7%E3%83%A2%E3%83%87%E3%83%AB
 - https://fuchsia.dev/fuchsia-src/concepts/kernel/time/monotonic
 - https://www.techtarget.com/whatis/definition/wall-time-real-world-time-or-wall-clock-time
+
+# 18.3
+
+# 18.3.1 runtime.now()
+
+- 現在時刻を取得してくる関数
+- ソフトウェア世界一番細かい粒度はナノ秒の単位です。10^−9 s
+- 1GHzのパルス幅は1ナノ秒
+- 現状のCPUのピークのクロック周波数が4GHzや5GHz
+- オーバーヘッドを考慮すると、ナノよりも良い精度が出ないのは想像に難くないでしょうか。
+  - Considering the overhead, it's not hard to imagine that it won't have better accuracy than nano.
+
+## Windows
+
+- 7ffe0000番地から1キロバイト:SharedUserDataという読み込み専用のデータ領域
+  - 先頭から20バイト：SystemTimeというシステム時間が保存される。Windowsカーネルが100ナノ秒で更新。Goはこのアドレスを参照し、現在時刻を取得。
+- +0x014 SystemTime       : _KSYSTEM_TIME
+  - http://uninformed.org/index.cgi?v=2&a=2&p=15
+
+## Linux
+
+- clock_gettime()
+- gettimeofday()
+- Go --最初--> clock_gettime() --利用できない場合--> gettimeofday()
+- vDSO(仮想ELF動的の共有オブジェクト)：システムオーバーヘッドがなく。
+- Note
+  - Regist hardware timer's event handler first
+  - update_vsyscall() could be called regularly
+    - Stores the current timestamp in a static variable inside the vDSO library
+
+## Mac
+
+- First, RDTSC (CPU Assembly)でCPU Timestamp Counter
+- Second, gettimeofday()システムコール
+
+# 18.3.2 runtime.semasleep()
+
+- タイマー処理を使用した時に最終的に呼び出される関数
+- セマフォの仕組み
+- 
+
+# 18.4
+# 18.4.1
+- 時間(time.Duration)
+- 時刻(time.Time)は日時情報
+- show time.kitchen and other format
